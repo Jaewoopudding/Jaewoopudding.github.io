@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-A simple inline announcement.
+A paper is accepted at ICLR 2024 Workshop on Generative Models for Decision Making as Spotlight!
