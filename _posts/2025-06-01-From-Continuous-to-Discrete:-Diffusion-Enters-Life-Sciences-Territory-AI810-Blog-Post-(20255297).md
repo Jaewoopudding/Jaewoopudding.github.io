@@ -17,7 +17,7 @@ authors:
       name: KAIST
 
 # must be the exact same name as your blogpost
-bibliography: 2025-06-01-jaewoo.bib
+bibliography: 2025-06-01-From-Continuous-to-Discrete:-Diffusion-Enters-Life-Sciences-Territory-AI810-Blog-Post-(20255297).bib
 
 # Add a table of contents to your post.
 #   - make sure that TOC names match the actual section names
