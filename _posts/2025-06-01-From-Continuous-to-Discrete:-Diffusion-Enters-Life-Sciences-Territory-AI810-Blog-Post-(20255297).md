@@ -285,7 +285,7 @@ Yet real design tasks demand **pushing samples toward explicit rewards**—expre
 
 ### 1 Continuous-time RL on a Discrete-Diffusion Generator
 
-Start from a pre-trained **masked discrete-diffusion CTMC** with transition rates $$\(Q*{\text{pre}}(t)\)$$.  
+Start from a pre-trained **masked discrete-diffusion CTMC** with transition rates $$Q*{\text{pre}}(t)$$.  
 We search for new rates $$Q*\theta(t)$$ that solve
 
 $$
