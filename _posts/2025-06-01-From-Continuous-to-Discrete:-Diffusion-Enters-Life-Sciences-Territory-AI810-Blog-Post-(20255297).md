@@ -285,23 +285,16 @@ Yet real design tasks demand **pushing samples toward explicit rewards**—expre
 
 ### 1 Continuous-time RL on a Discrete-Diffusion Generator
 
-Start from a pre-trained **masked discrete-diffusion CTMC** with transition rates $$Q*{\text{pre}}(t)$$.  
-We search for new rates $$Q*\theta(t)$$ that solve
+Start from a pre-trained **masked discrete-diffusion CTMC** with transition rates $$Q^{\text{pre}}(t)$$.  
+We search for new rates $$Q^\theta(t)$$ that solve
 
-$$
-\max*\theta\;
-\underbrace{\mathbb{E}*{x*{0:T}\sim P*\theta}\big[r(x_T)\big]}_{\text{task reward}}\;
--\;
-\alpha\,
-\underbrace{\mathbb{E}_{x*{0:T}\sim P*\theta}\!\!\int*0^{T}
-\mathrm{KL}\bigl(Q*\theta \,\Vert\, Q*{\text{pre}}\bigr)\,dt}*{\text{stay near the diffusion prior}}.
-$$
+$$\theta^*=\argmax_{\theta\in\Theta}\mathbb E_{x_{0:T}\sim P^\theta}[r(x_T)]-\alpha \mathbb E_{x_{0:T}\sim P^\theta} \left[ \int_{t=0} ^T\sum_{y\neq x_t  }\left( Q^{\theta_{pre}}_{x_t,y}(t)-Q^\theta_{x_t,y}(t) + Q^\theta_{x_t,y}(t)\log\frac{Q^\theta_{x_t,y}(t)}{Q^{\theta_{pre}}_{x_t,y}(t)} \right)dt \right]$$
 
 _Because the base generator is itself a CTMC discrete diffusion, this KL is computed **at every infinitesimal denoising step**, directly regularising the entire diffusion path._  
 At optimum the terminal distribution is the **exponentially tilted diffusion prior**
 
 $$
-p^\star*T(x)\;\propto\; e^{r(x)/\alpha}\,p*{\text{pre}}(x),
+p^\star_t(x)\;\propto\; \exp(V_t(x)/\alpha)p_t^{pre}(x),
 $$
 
 so the original diffusion manifold is preserved while reward is boosted.
@@ -318,7 +311,7 @@ so the original diffusion manifold is preserved while reward is boosted.
 ### 3 Theory Links to Diffusion
 
 - The optimal rates satisfy  
-  $$Q^\star*{x,y}(t)=Q^{\text{pre}}*{x,y}(t)\exp\!\bigl((V_t(y)-V_t(x))/\alpha\bigr)$$,  
+  $$Q^{\theta^*}_{x,y}(t)=Q^{\theta_{pre}}_{x,y}(t)\exp(\{V_t(y)-V_t(x)\}/\alpha)$$,  
   mirroring a **score-matching update** inside the diffusion kernel.
 - Classic **classifier guidance for discrete diffusion** appears as a _Doob transform_ special case; unlike DRAKES it requires no training but omits KL regularisation and underperforms on proteins.
 
