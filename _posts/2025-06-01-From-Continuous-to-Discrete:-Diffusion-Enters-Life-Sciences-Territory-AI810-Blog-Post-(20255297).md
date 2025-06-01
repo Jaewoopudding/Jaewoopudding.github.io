@@ -285,7 +285,7 @@ Yet real design tasks demand **pushing samples toward explicit rewards**—expre
 Start from a pre-trained **masked discrete-diffusion CTMC** with transition rates $$Q^{\text{pre}}(t)$$.  
 We search for new rates $$Q^\theta(t)$$ that solve
 
-$$\theta^*=\argmax_{\theta\in\Theta}\mathbb E_{x_{0:T}\sim P^\theta}[r(x_T)]-\alpha \mathbb E_{x_{0:T}\sim P^\theta} \left[ \int_{t=0} ^T\sum_{y\neq x_t  }\left( Q^{\theta_{pre}}_{x_t,y}(t)-Q^\theta_{x_t,y}(t) + Q^\theta_{x_t,y}(t)\log\frac{Q^\theta_{x_t,y}(t)}{Q^{\theta_{pre}}_{x_t,y}(t)} \right)dt \right]$$
+$$\theta^*=\arg \max_{\theta\in\Theta}\mathbb E_{x_{0:T}\sim P^\theta}[r(x_T)]-\alpha \mathbb E_{x_{0:T}\sim P^\theta} \left[ \int_{t=0} ^T\sum_{y\neq x_t  }\left( Q^{\theta_{pre}}_{x_t,y}(t)-Q^\theta_{x_t,y}(t) + Q^\theta_{x_t,y}(t)\log\frac{Q^\theta_{x_t,y}(t)}{Q^{\theta_{pre}}_{x_t,y}(t)} \right)dt \right]$$
 
 _Because the base generator is itself a CTMC discrete diffusion, this KL is computed **at every infinitesimal denoising step**, directly regularising the entire diffusion path._  
 At optimum the terminal distribution is the **exponentially tilted diffusion prior**
