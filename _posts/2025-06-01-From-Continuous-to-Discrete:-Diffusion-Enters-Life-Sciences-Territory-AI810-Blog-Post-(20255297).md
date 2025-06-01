@@ -187,10 +187,10 @@ where \(\tau\) is the soft-max temperature.
 MCG borrows the spirit of classifier-free guidance in image diffusion but removes the need for an **external** property predictor.  
 Instead, GenMol trains **two views of the _same_ denoiser** in a multi-task fashion:
 
-| View                                                    | Conditioning tokens                                                                                                                    | Role                                                                           |
-| ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| **Context-aware head** `$$\(x\_\theta^{\text{ctx}}\)$$` | full SAFE string **plus** an auxiliary _context vector_ `$$\\(c\)$$` (e.g. fragment bag-of-words, docking hotspot mask, scaffold type) | Learns to reconstruct fragments that are globally consistent with `$$\(c\)$$`. |
-| **Context-free head** `$$\(x\_\theta\)$$`               | SAFE string **only**, drop the context vector (replace with `\<no_ctx\>` token)                                                        | Learns the unconditional data distribution.                                    |
+| View                                                  | Conditioning tokens                                                                                                                    | Role                                                                           |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| **Context-aware head** $$\(x\_\theta^{\text{ctx}}\)$$ | full SAFE string **plus** an auxiliary _context vector_ `$$\\(c\)$$` (e.g. fragment bag-of-words, docking hotspot mask, scaffold type) | Learns to reconstruct fragments that are globally consistent with `$$\(c\)$$`. |
+| **Context-free head** $$\(x\_\theta\)$$               | SAFE string **only**, drop the context vector (replace with `\<no_ctx\>` token)                                                        | Learns the unconditional data distribution.                                    |
 
 During **training** the two heads share all transformer layers except the final projection, so extra parameters are negligible.  
 At **sampling** time we blend the two logits:
@@ -207,19 +207,19 @@ w\;\log x*\theta(z*t,t)\;+\;
 
 </div>
 
-- `$$\(w\in[0,1]\)$$` is the **guidance weight**.
-- `$$\(w\!\downarrow\)$$` → pure, unbiased samples; `$$\(w\!\uparrow\)$$` → context-faithful but potentially lower diversity.
+- $$\(w\in[0,1]\)$$ is the **guidance weight**.
+- $$\(w\!\downarrow\)$$ → pure, unbiased samples; `$$\(w\!\uparrow\)$$` → context-faithful but potentially lower diversity.
 - Because both heads live in the same network, the blend costs **one** forward pass—no extra GPU memory, no back-prop, no separate classifier.
 
 **Why it works.**  
-Intuitively, `$$\(\log x*\theta^{\text{ctx}}\)$$` raises probability mass on tokens that fit the desired global structure, while `$$\(\log x*\theta\)$$` provides a diversity-preserving prior. Their linear mix shifts the reverse diffusion drift toward molecules that honour the context without collapsing onto a single mode.
+Intuitively, $$\(\log x*\theta^{\text{ctx}}\)$$ raises probability mass on tokens that fit the desired global structure, while $$\(\log x*\theta\)$$ provides a diversity-preserving prior. Their linear mix shifts the reverse diffusion drift toward molecules that honour the context without collapsing onto a single mode.
 
 ### 3 Confidence-Based Sampling
 
-Standard diffusion would resample **every** mask at every step, frequently overwriting good predictions. GenMol instead adopts **confidence sampling** <d-cite key="chang2022maskgit"></d-cite> with three hyper-parameters `$$\((N,\tau,r)\)$$`. For each still-masked position `$$\(l\)$$` at reverse-time `$$\(t\)$$`:
+Standard diffusion would resample **every** mask at every step, frequently overwriting good predictions. GenMol instead adopts **confidence sampling** <d-cite key="chang2022maskgit"></d-cite> with three hyper-parameters $$\((N,\tau,r)\)$$. For each still-masked position $$\(l\)$$ at reverse-time $$\(t\)$$:
 
 1. **Predict a token.**  
-   Apply the soft-max with temperature `$$\(\tau\)$$` to the mixed logits from Eq.&nbsp;(4) and sample an index `$$\(i^\ast\)$$` for each still-masked position `$$\(l\)$$`.
+   Apply the soft-max with temperature $$\(\tau\)$$ to the mixed logits from Eq.&nbsp;(4) and sample an index $$\(i^\ast\)$$ for each still-masked position $$\(l\)$$.
 
 2. **Compute a confidence score** that blends model certainty with controllable exploration:
 
@@ -234,17 +234,17 @@ Standard diffusion would resample **every** mask at every step, frequently overw
    \tag{8}
    $$
 
-   Here \(p\_{\theta,i^\ast}^{(l)}\) is the model’s probability for the sampled category at time step `$$\(t\)$$`,  
-   while the additive Gumbel noise \(\varepsilon\) is **scaled by \(r\,t\)**—large and exploratory in early iterations, then cooling off as `$$\(t \!\downarrow\)$$` to make late steps increasingly deterministic.
+   Here \(p\_{\theta,i^\ast}^{(l)}\) is the model’s probability for the sampled category at time step $$\(t\)$$,  
+   while the additive Gumbel noise \(\varepsilon\) is **scaled by \(r\,t\)**—large and exploratory in early iterations, then cooling off as $$\(t \!\downarrow\)$$ to make late steps increasingly deterministic.
 
 3. **Freeze the confident tokens.**  
-    Rank all still-masked positions by their `$$\(c*t^{(l)}\)$$` scores and permanently unmask the top `$$\(N\)$$`; the remainder stay masked for the next reverse-diffusion step.
+    Rank all still-masked positions by their $$\(c*t^{(l)}\)$$ scores and permanently unmask the top $$\(N\)$$; the remainder stay masked for the next reverse-diffusion step.
    Effectively, GenMol makes a \_parallel\* guess for every fragment, then “commits” only the most confident ones.  
    The procedure repeats until no masks remain, yielding:
 
 - **Quality–speed trade-off.**  
   Larger \(N\) or smaller \(\tau\) reduces steps (faster) but can hurt quality; higher randomness \(r\) broadens exploration.  
-  Appendix B shows that `$$\(N\!=\!1,\;\tau\!=\!0.5,\;r\!=\!0.5\)$$` attains the best validity/quality balance, while \(N\!=\!3\) triples speed with only moderate quality loss. :contentReference[oaicite:5]{index=5}
+  Appendix B shows that $$\(N\!=\!1,\;\tau\!=\!0.5,\;r\!=\!0.5\)$$ attains the best validity/quality balance, while \(N\!=\!3\) triples speed with only moderate quality loss. :contentReference[oaicite:5]{index=5}
 - **Context sensitivity.**  
   Because only high-confidence positions freeze, later denoising rounds can adapt earlier uncertain fragments to satisfy long-range chemistry constraints, a capability AR models lack.
 
@@ -284,8 +284,9 @@ Yet real design tasks demand **pushing samples toward explicit rewards**—expre
 ### 1 Continuous-time RL on a Discrete-Diffusion Generator
 
 Start from a pre-trained **masked discrete-diffusion CTMC** with transition rates \(Q*{\text{pre}}(t)\).  
-We search for new rates \(Q*\theta(t)\) that solve
+We search for new rates $$\(Q*\theta(t)\)$$ that solve
 
+$$
 \[
 \max*\theta\;
 \underbrace{\mathbb{E}*{x*{0:T}\sim P*\theta}\big[r(x_T)\big]}_{\text{task reward}}\;
@@ -294,13 +295,16 @@ We search for new rates \(Q*\theta(t)\) that solve
 \underbrace{\mathbb{E}_{x*{0:T}\sim P*\theta}\!\!\int*0^{T}
 \mathrm{KL}\bigl(Q*\theta \,\Vert\, Q*{\text{pre}}\bigr)\,dt}*{\text{stay near the diffusion prior}}.
 \]
+$$
 
 _Because the base generator is itself a CTMC discrete diffusion, this KL is computed **at every infinitesimal denoising step**, directly regularising the entire diffusion path._  
 At optimum the terminal distribution is the **exponentially tilted diffusion prior**
 
+$$
 \[
 p^\star*T(x)\;\propto\; e^{r(x)/\alpha}\,p*{\text{pre}}(x),
 \]
+$$
 
 so the original diffusion manifold is preserved while reward is boosted.
 
@@ -316,7 +320,7 @@ so the original diffusion manifold is preserved while reward is boosted.
 ### 3 Theory Links to Diffusion
 
 - The optimal rates satisfy  
-  \(Q^\star*{x,y}(t)=Q^{\text{pre}}*{x,y}(t)\exp\!\bigl((V_t(y)-V_t(x))/\alpha\bigr)\),  
+  $$\(Q^\star*{x,y}(t)=Q^{\text{pre}}*{x,y}(t)\exp\!\bigl((V_t(y)-V_t(x))/\alpha\bigr)\)$$,  
   mirroring a **score-matching update** inside the diffusion kernel.
 - Classic **classifier guidance for discrete diffusion** appears as a _Doob transform_ special case; unlike DRAKES it requires no training but omits KL regularisation and underperforms on proteins.
 
