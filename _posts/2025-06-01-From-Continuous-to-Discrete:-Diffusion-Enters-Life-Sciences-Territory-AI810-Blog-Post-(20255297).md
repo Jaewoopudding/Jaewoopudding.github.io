@@ -211,9 +211,6 @@ w\;\log x*\theta(z*t,t)\;+\;
 - $$w\!\downarrow$$ → pure, unbiased samples; $$w\!\uparrow$$ → context-faithful but potentially lower diversity.
 - Because both heads live in the same network, the blend costs **one** forward pass—no extra GPU memory, no back-prop, no separate classifier.
 
-**Why it works.**  
-Intuitively, $$\log x*\theta^{\text{ctx}}$$ raises probability mass on tokens that fit the desired global structure, while $$\log x*\theta$$ provides a diversity-preserving prior. Their linear mix shifts the reverse diffusion drift toward molecules that honour the context without collapsing onto a single mode.
-
 ### 3 Confidence-Based Sampling
 
 Standard diffusion would resample **every** mask at every step, frequently overwriting good predictions. GenMol instead adopts **confidence sampling** <d-cite key="chang2022maskgit"></d-cite> with three hyper-parameters $$(N,\tau,r)$$. For each still-masked position $$l$$ at reverse-time $$t$$:
