@@ -6,9 +6,9 @@
 # `jekyll serve`. If you change this file, please restart the server process.
 
 # Site Settings
-title                    : "Taeyoung Yun"
+title                    : "Jaewoo Lee"
 description              : ""
-repository               : "dbsxodud-11/dbsxodud-11.github.io"
+repository               : "Jaewoopudding/Jaewoopudding.github.io"
 google_scholar_stats_use_cdn : true
 
 # google analytics
@@ -21,14 +21,14 @@ baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.ba
 
 # Site Author
 author:
-  name             : "Taeyoung Yun"
+  name             : "Jaewoo Lee"
   avatar           : "images/profile.jpg"
   bio              : "Ph.D Student at KAIST"
   location         : "Daejeon, Korea"
   employer         :
   pubmed           : 
-  googlescholar    : "https://scholar.google.com/citations?user=_51PhLQAAAAJ"
-  email            : "99yty@kaist.ac.kr"
+  googlescholar    : "https://scholar.google.com/citations?user=Mlfr7PQAAAAJ"
+  email            : "jaewoo@kaist.ac.kr"
   researchgate     :  # e.g., "https://www.researchgate.net/profile/yourprofile"
   uri              :
   bitbucket        :
@@ -37,13 +37,13 @@ author:
   flickr           :
   facebook         :
   foursquare       :
-  github           : dbsxodud-11
+  github           : Jaewoopudding
   google_plus      :
   keybase          :
   instagram        :
   impactstory      : # e.g., "https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           :
-  linkedin         : taeyoung-yun-295864269
+  linkedin         : jaewoo-lee-2a7b2a1b7
   dblp             : # e.g., "https://dblp.org/pid/xx/xxxx.html"
   orcid            : # e.g., "https://orcid.org/xxxx"
   pinterest        :

@@ -23,7 +23,9 @@ group :jekyll_plugins do
   # gem "jekyll-archives"
   gem "jekyll-feed"
   gem 'jekyll-sitemap'
-  gem 'hawkins'
+  # hawkins (livereload) disabled: its eventmachine native extension fails to
+  # load against OpenSSL 3; plain `jekyll serve` works without it.
+  # gem 'hawkins'
 end
 
 gem "webrick", "~> 1.8"
