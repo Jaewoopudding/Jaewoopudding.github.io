@@ -25,6 +25,7 @@ If you would like to discuss research, explore collaborations, or just have a ch
 
 
 # 🔥 News
+- 2026.09: &nbsp;🎉🎉 2 papers accepted at NeurIPS 2026
 - 2026.06: &nbsp;🎉🎉 3 workshop papers accepted at ICML 2026 (SPIGM, DEMO, RLxF)
 - 2026.01: &nbsp;🎉🎉 2 papers accepted at ICLR 2026
 - 2026.01: &nbsp;🎉🎉 1 paper accepted at AISTATS 2026
@@ -47,23 +48,23 @@ If you would like to discuss research, explore collaborations, or just have a ch
 
 ## Preprints
 
-- **[P3] Aligning Few-Step Generative Models by Amortizing Sample-based Variational Inference**  
-[[paper]](https://arxiv.org/abs/2605.26552) / [[code]](https://github.com/Jaewoopudding/FAV)  
-**Jaewoo Lee**\*, Hyeongyu Kang\*, Dohyun Kim, Kyuil Sim, Woocheol Shin, Minsu Kim, Taeyoung Yun, Jeongjae Lee, Sanghyeok Choi, Tabitha Edith Lee, Jong Chul Ye†, Jinkyoo Park†  
-<span style="color:darkorchid">**arXiv 2026**</span>  
-<span style="color:darkorchid">**ICML 2026 SPIGM Workshop**</span>
-
-- **[P2] Automated Kernel Discovery Towards Understanding High-dimensional Bayesian Optimization**  
-[[paper]](https://arxiv.org/abs/2605.20249) / [[code]](https://github.com/Shin-woocheol/Kernel_discovery)  
-Taeyoung Yun\*, Woocheol Shin\*, Inhyuck Song, **Jaewoo Lee**, Jinkyoo Park  
-<span style="color:darkorchid">**arXiv 2026**</span>  
-<span style="color:darkorchid">**ICML 2026 DEMO Workshop**</span>
-
 - **[P1] Robust Exploration through Generative Replay**  
 Inhyuck Song, Taeyoung Yun, **Jaewoo Lee**, Jinkyoo Park  
 <span style="color:darkorchid">**ICML 2026 RLxF Workshop**</span>
 
 ## Conference Publications
+
+- **[C8] Aligning Few-Step Generative Models by Amortizing Sample-based Variational Inference**  
+[[paper]](https://arxiv.org/abs/2605.26552) / [[code]](https://github.com/Jaewoopudding/FAV)  
+**Jaewoo Lee**\*, Hyeongyu Kang\*, Dohyun Kim, Kyuil Sim, Woocheol Shin, Minsu Kim, Taeyoung Yun, Jeongjae Lee, Sanghyeok Choi, Tabitha Edith Lee, Jong Chul Ye†, Jinkyoo Park†  
+<span style="color:darkorchid">**NeurIPS 2026**</span>  
+<span style="color:darkorchid">**ICML 2026 SPIGM Workshop**</span>
+
+- **[C7] Automated Kernel Discovery Towards Understanding High-dimensional Bayesian Optimization**  
+[[paper]](https://arxiv.org/abs/2605.20249) / [[code]](https://github.com/Shin-woocheol/Kernel_discovery)  
+Taeyoung Yun\*, Woocheol Shin\*, Inhyuck Song, **Jaewoo Lee**, Jinkyoo Park  
+<span style="color:darkorchid">**NeurIPS 2026**</span>  
+<span style="color:darkorchid">**ICML 2026 DEMO Workshop**</span>
 
 - **[C6] Adaptive Replay Buffer for Offline-to-Online Reinforcement Learning**  
 [[paper]](https://arxiv.org/abs/2512.10510) / [[code]](https://github.com/song970407/ARB)  
