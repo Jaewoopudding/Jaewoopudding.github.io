@@ -48,6 +48,10 @@ If you would like to discuss research, explore collaborations, or just have a ch
 
 ## Preprints
 
+- **[P2] FestDPO: Few-step Generator Alignment with Direct Preference Optimization**  
+[[paper]](https://arxiv.org/abs/2609.34673)  
+**Jaewoo Lee**, Kyuil Sim, Hyeongyu Kang, Kanghoon Lee, Woocheol Shin, Jinkyoo Park
+
 - **[P1] Robust Exploration through Generative Replay**  
 Inhyuck Song, Taeyoung Yun, **Jaewoo Lee**, Jinkyoo Park  
 <span style="color:darkorchid">**ICML 2026 RLxF Workshop**</span>
